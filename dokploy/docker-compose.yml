@@ -1,0 +1,51 @@
+# Host network so the GCP firewall rule (tag rustdesk) is the only thing deciding exposure.
+# 21118/21119 (web client) listen too, but no rule opens them.
+# The volume name is fixed: id_ed25519 lives there, and losing it disconnects every client.
+services:
+  hbbs:
+    image: rustdesk/rustdesk-server:1.1.16
+    command: hbbs -k _ -r remoto.singularpharma.com.br:21117
+    volumes:
+      - rustdesk-data:/root
+    network_mode: host
+    depends_on:
+      - hbbr
+    restart: unless-stopped
+
+  hbbr:
+    image: rustdesk/rustdesk-server:1.1.16
+    command: hbbr -k _
+    volumes:
+      - rustdesk-data:/root
+    network_mode: host
+    restart: unless-stopped
+
+  # Community API (heartbeat, connection audit, admin panel), built from the Singular fork;
+  # upstream lejianwen is unmaintained since 2025-09.
+  # Gets only the public key; the volume holding the private key is never mounted here.
+  api:
+    build:
+      context: ..
+      dockerfile: dokploy/Dockerfile
+    image: rustdesk-api:singular
+    environment:
+      TZ: America/Bahia
+      RUSTDESK_API_LANG: en
+      RUSTDESK_API_RUSTDESK_ID_SERVER: remoto.singularpharma.com.br:21116
+      RUSTDESK_API_RUSTDESK_RELAY_SERVER: remoto.singularpharma.com.br:21117
+      RUSTDESK_API_RUSTDESK_API_SERVER: https://remoto-api.singularpharma.com.br
+      RUSTDESK_API_RUSTDESK_KEY: 2KRXK1I4QZAYx+7nJ1IE5f5pHWWqDOZ6WTCF4WrX228=
+      RUSTDESK_API_APP_REGISTER: "false"
+      RUSTDESK_API_APP_WEB_CLIENT: "0"
+      RUSTDESK_API_APP_SHOW_SWAGGER: "0"
+      RUSTDESK_API_APP_BAN_THRESHOLD: "10"
+    volumes:
+      - rustdesk-api-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  rustdesk-data:
+    name: rustdesk-data
+  rustdesk-api-data:
+    name: rustdesk-api-data
+
