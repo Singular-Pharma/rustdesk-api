@@ -1,10 +1,11 @@
 FROM golang:1.23-alpine AS backend
 RUN apk add --no-cache gcc musl-dev
 WORKDIR /src
-COPY go.mod go.sum ./
-RUN go mod download && go install github.com/swaggo/swag/cmd/swag@v1.16.3
+RUN go install github.com/swaggo/swag/cmd/swag@v1.16.3
 COPY . .
-RUN swag init -g cmd/apimain.go --output docs/api --instanceName api --exclude http/controller/admin \
+# upstream gitignores go.sum and resolves it with tidy at build time
+RUN go mod tidy \
+ && swag init -g cmd/apimain.go --output docs/api --instanceName api --exclude http/controller/admin \
  && swag init -g cmd/apimain.go --output docs/admin --instanceName admin --exclude http/controller/api \
  && CGO_ENABLED=1 go build -ldflags "-s -w -extldflags '-static'" -o /out/apimain ./cmd/apimain.go
 
