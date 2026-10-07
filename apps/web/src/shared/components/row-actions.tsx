@@ -41,17 +41,19 @@ export function RowActions({
           <Fragment key={index}>
             {index > 0 && <DropdownMenuSeparator />}
             <DropdownMenuGroup>
-              {group.map(({ label, icon: Icon, render, onSelect, destructive }) => (
-                <DropdownMenuItem
-                  key={label}
-                  render={render}
-                  onClick={onSelect}
-                  variant={destructive ? "destructive" : "default"}
-                >
-                  <Icon />
-                  {label}
-                </DropdownMenuItem>
-              ))}
+              {group.map(
+                ({ label, icon: Icon, render, onSelect, destructive }) => (
+                  <DropdownMenuItem
+                    key={label}
+                    render={render}
+                    onClick={onSelect}
+                    variant={destructive ? "destructive" : "default"}
+                  >
+                    <Icon />
+                    {label}
+                  </DropdownMenuItem>
+                )
+              )}
             </DropdownMenuGroup>
           </Fragment>
         ))}

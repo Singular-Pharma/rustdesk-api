@@ -41,7 +41,9 @@ export function UserDetail({ id }: { id: number }) {
               </div>
               <div className="flex flex-wrap gap-2">
                 <UserStatus user={user} />
-                {user.is_admin && <Badge variant="outline">Administrador</Badge>}
+                {user.is_admin && (
+                  <Badge variant="outline">Administrador</Badge>
+                )}
               </div>
             </div>
             <div className="flex flex-wrap gap-2">

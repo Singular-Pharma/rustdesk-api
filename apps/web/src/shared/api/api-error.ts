@@ -34,7 +34,10 @@ const serverReplies: [fragment: string, message: string][] = [
     "Cannot share to self",
     "O catálogo não pode ser compartilhado com o próprio dono.",
   ],
-  ["Params validation failed", "Confira os dados informados e tente novamente."],
+  [
+    "Params validation failed",
+    "Confira os dados informados e tente novamente.",
+  ],
 ]
 
 export function isLoginRequired(error: unknown) {
@@ -47,7 +50,9 @@ export function isLoginRequired(error: unknown) {
 }
 
 export function isForbidden(error: unknown) {
-  return error instanceof ApiError && error.code === 403 && !isLoginRequired(error)
+  return (
+    error instanceof ApiError && error.code === 403 && !isLoginRequired(error)
+  )
 }
 
 export function errorMessage(
@@ -62,8 +67,9 @@ export function errorMessage(
   if (error instanceof ApiError) {
     if (error.message.includes("Item not found")) return notFound
     return (
-      serverReplies.find(([fragment]) => error.message.includes(fragment))?.[1] ??
-      fallback
+      serverReplies.find(([fragment]) =>
+        error.message.includes(fragment)
+      )?.[1] ?? fallback
     )
   }
   if (!axios.isAxiosError(error)) return fallback

@@ -14,12 +14,7 @@ import { UserAvatar } from "@/shared/components/user-avatar"
 import { FilterSelect } from "@/shared/list/filter-select"
 import { matchesQuery } from "@/shared/list/search"
 import { useGroupNames } from "@/features/groups/api/groups-api"
-import {
-  enabledStatus,
-  userLabel,
-  useUsers,
-  type User,
-} from "../api/users-api"
+import { enabledStatus, userLabel, useUsers, type User } from "../api/users-api"
 import type { UserSearch } from "../schemas"
 import { RemoveUserDialog, ResetPasswordDialog } from "./user-dialogs"
 

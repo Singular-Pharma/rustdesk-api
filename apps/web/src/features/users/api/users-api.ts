@@ -61,7 +61,9 @@ export function useUserNames() {
     },
     options: (list.data ?? []).map((user) => ({
       value: String(user.id),
-      label: user.nickname ? `${user.nickname} (${user.username})` : user.username,
+      label: user.nickname
+        ? `${user.nickname} (${user.username})`
+        : user.username,
     })),
   }
 }

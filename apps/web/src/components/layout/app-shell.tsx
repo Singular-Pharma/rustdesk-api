@@ -206,7 +206,9 @@ function ThemeToggle() {
     <Button
       variant="ghost"
       size="icon"
-      aria-label={theme === "light" ? "Ativar tema escuro" : "Ativar tema claro"}
+      aria-label={
+        theme === "light" ? "Ativar tema escuro" : "Ativar tema claro"
+      }
       onClick={() => useThemeStore.getState().toggle()}
     >
       {theme === "light" ? <Moon /> : <Sun />}

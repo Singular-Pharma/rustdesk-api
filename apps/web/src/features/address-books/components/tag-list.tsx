@@ -114,7 +114,9 @@ function TagDialog({
         readOnly={save.isPending}
         error={form.formState.errors.name}
         note={
-          tag ? "Endereços que já usam o nome antigo não são atualizados" : undefined
+          tag
+            ? "Endereços que já usam o nome antigo não são atualizados"
+            : undefined
         }
         {...form.register("name")}
       />
@@ -161,8 +163,8 @@ function RemoveTagDialog({ tag, onClose }: { tag: Tag; onClose: () => void }) {
       title="Remover tag?"
       description={
         <>
-          <strong>{tag.name}</strong> deixa de aparecer como opção. Os
-          endereços marcados com ela mantêm o nome.
+          <strong>{tag.name}</strong> deixa de aparecer como opção. Os endereços
+          marcados com ela mantêm o nome.
         </>
       }
       confirmLabel="Remover tag"
@@ -306,7 +308,9 @@ export function TagList() {
       error={query.isError ? query.error : null}
       errorMessage="Não foi possível carregar as tags. Tente novamente."
       refresh={() => void query.refetch()}
-      emptyMessage={hasFilters ? "Nenhuma tag encontrada" : "Nenhuma tag cadastrada"}
+      emptyMessage={
+        hasFilters ? "Nenhuma tag encontrada" : "Nenhuma tag cadastrada"
+      }
       mobileRow={(tag) => (
         <div className="flex items-start gap-3">
           <div className="flex min-w-0 flex-1 flex-col gap-1">

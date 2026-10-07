@@ -73,10 +73,8 @@ export function RuleDialog({
     resolver: zodResolver(ruleFormSchema),
     defaultValues: {
       type: String(rule?.type ?? ruleTargets.user),
-      userId:
-        rule && rule.type !== ruleTargets.group ? String(rule.to_id) : "",
-      groupId:
-        rule?.type === ruleTargets.group ? String(rule.to_id) : "",
+      userId: rule && rule.type !== ruleTargets.group ? String(rule.to_id) : "",
+      groupId: rule?.type === ruleTargets.group ? String(rule.to_id) : "",
       rule: String(rule?.rule ?? 1),
     },
   })

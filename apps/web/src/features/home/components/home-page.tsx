@@ -5,7 +5,10 @@ import { LoadingLine } from "@/shared/components/loading-line"
 import { Kpi } from "@/shared/components/kpi"
 import { Panel } from "@/shared/components/panel"
 import { RequestError } from "@/shared/components/request-error"
-import { lastSeenWindows, useDeviceCount } from "@/features/devices/api/devices-api"
+import {
+  lastSeenWindows,
+  useDeviceCount,
+} from "@/features/devices/api/devices-api"
 import { useUsers } from "@/features/users/api/users-api"
 import { connectionKind, connections } from "@/features/audit/api/audit-api"
 import {

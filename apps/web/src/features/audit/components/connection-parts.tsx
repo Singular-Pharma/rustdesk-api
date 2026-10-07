@@ -11,7 +11,9 @@ export function ConnectionPeers({ connection }: { connection: Connection }) {
   return (
     <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-0.5">
       <span className="break-words">
-        {origin || <span className="text-muted-foreground">Origem não informada</span>}
+        {origin || (
+          <span className="text-muted-foreground">Origem não informada</span>
+        )}
         {connection.from_name && connection.from_peer && (
           <span className="ml-1.5 font-mono text-xs text-muted-foreground tabular-nums">
             {connection.from_peer}
@@ -22,7 +24,9 @@ export function ConnectionPeers({ connection }: { connection: Connection }) {
         aria-label="acessou"
         className="size-3.5 shrink-0 text-muted-foreground"
       />
-      <span className="font-mono text-sm tabular-nums">{connection.peer_id}</span>
+      <span className="font-mono text-sm tabular-nums">
+        {connection.peer_id}
+      </span>
     </span>
   )
 }

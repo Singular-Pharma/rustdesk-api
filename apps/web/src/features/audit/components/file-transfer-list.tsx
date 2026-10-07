@@ -40,9 +40,7 @@ function TransferContent({ transfer }: { transfer: FileTransfer }) {
   const count = transfer.is_file ? 1 : transfer.num || transfer.info.length
   return (
     <div className="min-w-0">
-      <span className="block font-mono text-xs break-all">
-        {transfer.path}
-      </span>
+      <span className="block font-mono text-xs break-all">{transfer.path}</span>
       <span className="mt-0.5 block text-xs text-muted-foreground tabular-nums">
         {transfer.is_file
           ? "Arquivo"

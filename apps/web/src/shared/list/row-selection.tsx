@@ -2,7 +2,9 @@ import { useState } from "react"
 import type { ColumnDef, RowSelectionState } from "@tanstack/react-table"
 import { Checkbox } from "@workspace/ui/components/checkbox"
 
-export function selectionColumn<T>(describe: (item: T) => string): ColumnDef<T> {
+export function selectionColumn<T>(
+  describe: (item: T) => string
+): ColumnDef<T> {
   return {
     id: "select",
     enableSorting: false,

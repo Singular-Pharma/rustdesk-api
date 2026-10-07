@@ -55,7 +55,10 @@ export type Entry = z.infer<typeof entrySchema>
 export type Tag = z.infer<typeof tagSchema>
 
 export type CollectionInput = Pick<Collection, "user_id" | "name">
-export type RuleInput = Pick<Rule, "user_id" | "collection_id" | "rule" | "type" | "to_id">
+export type RuleInput = Pick<
+  Rule,
+  "user_id" | "collection_id" | "rule" | "type" | "to_id"
+>
 export type EntryInput = Omit<Entry, "row_id"> & { password?: string }
 export type TagInput = Omit<Tag, "id">
 
@@ -112,10 +115,14 @@ export function useCollection(id: number) {
 
 export function useCollectionOptions(userId: number | undefined) {
   const list = useCollections()
-  const byId = new Map(list.data?.map((collection) => [collection.id, collection]))
+  const byId = new Map(
+    list.data?.map((collection) => [collection.id, collection])
+  )
   return {
     name: (id: number) =>
-      id === personalCollectionId ? personalCollectionLabel : byId.get(id)?.name,
+      id === personalCollectionId
+        ? personalCollectionLabel
+        : byId.get(id)?.name,
     options: [
       { value: String(personalCollectionId), label: personalCollectionLabel },
       ...(list.data ?? [])
@@ -176,7 +183,10 @@ export function saveEntry(entry: EntryInput, rowId?: number) {
 }
 
 export function removeEntry(entry: Entry) {
-  return postData("/address_book/delete", { row_id: entry.row_id, id: entry.id })
+  return postData("/address_book/delete", {
+    row_id: entry.row_id,
+    id: entry.id,
+  })
 }
 
 export function entryName(entry: Pick<Entry, "alias" | "hostname" | "id">) {

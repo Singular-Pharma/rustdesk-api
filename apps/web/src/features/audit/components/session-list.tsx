@@ -11,7 +11,8 @@ import { LogList } from "./log-list"
 const route = getRouteApi("/_authenticated/audit/sessions")
 
 function Expiry({ session, now }: { session: Session; now: number }) {
-  if (session.expired_at > 0 && session.expired_at * 1000 < now) return <Badge variant="outline">Expirada</Badge>
+  if (session.expired_at > 0 && session.expired_at * 1000 < now)
+    return <Badge variant="outline">Expirada</Badge>
   return (
     <span className="tabular-nums">
       {session.expired_at ? formatUnixTime(session.expired_at) : "Sem validade"}

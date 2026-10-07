@@ -18,7 +18,11 @@ export function formatUnixTime(seconds: number, empty = "") {
 
 const relative = new Intl.RelativeTimeFormat("pt-BR", { numeric: "auto" })
 
-const relativeSteps: [limit: number, seconds: number, unit: Intl.RelativeTimeFormatUnit][] = [
+const relativeSteps: [
+  limit: number,
+  seconds: number,
+  unit: Intl.RelativeTimeFormatUnit,
+][] = [
   [60, 1, "second"],
   [3600, 60, "minute"],
   [86_400, 3600, "hour"],
@@ -41,7 +45,8 @@ export function isOnline(lastOnline: number, now = Date.now()) {
   return lastOnline > 0 && now / 1000 - lastOnline < onlineWindowSeconds
 }
 
-const serverSecondsPattern = /^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/
+const serverSecondsPattern =
+  /^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/
 
 export function serverDateToUnix(value: string) {
   const match = serverSecondsPattern.exec(value)

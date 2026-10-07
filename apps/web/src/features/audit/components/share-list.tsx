@@ -22,8 +22,7 @@ const passwordTypes: Record<string, string> = {
 function Validity({ share, now }: { share: Share; now: number }) {
   if (!share.expire) return <span>Sem validade</span>
   const expiresAt = serverDateToUnix(share.created_at) + share.expire
-  if (expiresAt * 1000 < now)
-    return <Badge variant="outline">Expirado</Badge>
+  if (expiresAt * 1000 < now) return <Badge variant="outline">Expirado</Badge>
   return <span className="tabular-nums">{formatUnixTime(expiresAt)}</span>
 }
 

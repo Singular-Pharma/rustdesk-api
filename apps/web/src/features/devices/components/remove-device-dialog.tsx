@@ -1,7 +1,12 @@
 import { useNavigate } from "@tanstack/react-router"
 import { useAdminMutation } from "@/shared/api/mutation"
 import { ConfirmDialog } from "@/shared/components/confirm-dialog"
-import { deviceName, devices, devicesKey, type Device } from "../api/devices-api"
+import {
+  deviceName,
+  devices,
+  devicesKey,
+  type Device,
+} from "../api/devices-api"
 
 export function RemoveDeviceDialog({
   device,

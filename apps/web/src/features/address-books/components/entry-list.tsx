@@ -46,7 +46,9 @@ function remoteFilters(search: EntrySearch, query?: string): EntryFilters {
 }
 
 function platformLabel(platform: string) {
-  return platforms.find((option) => option.value === platform)?.label ?? platform
+  return (
+    platforms.find((option) => option.value === platform)?.label ?? platform
+  )
 }
 
 function EntryIdentity({ entry }: { entry: Entry }) {

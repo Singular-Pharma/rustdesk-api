@@ -89,7 +89,9 @@ export function LoginPage({
       form.reset()
       await navigate({ to: "/", replace: true })
     } catch (failure) {
-      setError(errorMessage(failure, "Não foi possível entrar. Tente novamente."))
+      setError(
+        errorMessage(failure, "Não foi possível entrar. Tente novamente.")
+      )
       form.resetField("password")
       if (
         captcha ||

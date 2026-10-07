@@ -40,8 +40,7 @@ const copy = {
     create: "Novo grupo",
     edit: "Editar grupo",
     empty: "Nenhum grupo de dispositivo cadastrado",
-    removeConsequence:
-      "Os dispositivos do grupo continuam cadastrados.",
+    removeConsequence: "Os dispositivos do grupo continuam cadastrados.",
   },
 }
 
@@ -167,7 +166,11 @@ export function GroupList({ kind }: { kind: GroupKind }) {
     <RowActions
       name={group.name}
       actions={[
-        { label: copy[kind].edit, icon: Pencil, onSelect: () => setEditing(group) },
+        {
+          label: copy[kind].edit,
+          icon: Pencil,
+          onSelect: () => setEditing(group),
+        },
         {
           label: "Remover",
           icon: Trash2,
@@ -240,9 +243,7 @@ export function GroupList({ kind }: { kind: GroupKind }) {
         </Button>
       }
       filtered={!!search.q}
-      clearFilters={() =>
-        void navigate({ to: ".", search: {}, replace: true })
-      }
+      clearFilters={() => void navigate({ to: ".", search: {}, replace: true })}
       loading={groups.isPending}
       refreshing={groups.isFetching}
       error={groups.isError ? groups.error : null}

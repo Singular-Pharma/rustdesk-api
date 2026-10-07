@@ -37,7 +37,10 @@ export function CollectionList() {
   const [removing, setRemoving] = useState<Collection | null>(null)
   const ruleCount = new Map<number, number>()
   for (const rule of allRules.data ?? [])
-    ruleCount.set(rule.collection_id, (ruleCount.get(rule.collection_id) ?? 0) + 1)
+    ruleCount.set(
+      rule.collection_id,
+      (ruleCount.get(rule.collection_id) ?? 0) + 1
+    )
   const hasFilters = !!(search.q || search.user)
   const ownerName = (collection: Collection) =>
     users.name(collection.user_id) ?? "Usuário removido"

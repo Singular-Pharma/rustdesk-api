@@ -14,17 +14,15 @@ const connectionSchema = z.object({
   created_at: serverDate,
 })
 
-const transferredFilesSchema = z
-  .string()
-  .transform((info) => {
-    try {
-      return z
-        .object({ files: z.array(z.tuple([z.string(), z.number()])) })
-        .parse(JSON.parse(info)).files
-    } catch {
-      return []
-    }
-  })
+const transferredFilesSchema = z.string().transform((info) => {
+  try {
+    return z
+      .object({ files: z.array(z.tuple([z.string(), z.number()])) })
+      .parse(JSON.parse(info)).files
+  } catch {
+    return []
+  }
+})
 
 const fileTransferSchema = z.object({
   id: z.number(),
