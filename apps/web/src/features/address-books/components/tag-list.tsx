@@ -252,6 +252,7 @@ export function TagList() {
     },
   ]
   const table = useReactTable({
+    autoResetPageIndex: false,
     data: rows,
     columns,
     getRowId: (tag) => String(tag.id),

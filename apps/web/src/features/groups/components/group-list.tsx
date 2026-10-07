@@ -215,6 +215,7 @@ export function GroupList({ kind }: { kind: GroupKind }) {
     },
   ]
   const table = useReactTable({
+    autoResetPageIndex: false,
     data: rows,
     columns,
     getRowId: (group) => String(group.id),

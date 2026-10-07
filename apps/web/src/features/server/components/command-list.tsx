@@ -137,6 +137,7 @@ export function CommandList() {
     },
   ]
   const table = useReactTable({
+    autoResetPageIndex: false,
     data: rows,
     columns,
     getRowId: (command) =>
