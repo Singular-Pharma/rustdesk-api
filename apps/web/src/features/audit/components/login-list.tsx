@@ -3,7 +3,7 @@ import type { ColumnDef } from "@tanstack/react-table"
 import { formatServerDateTime } from "@/shared/format"
 import { useUserNames } from "@/features/users/api/users-api"
 import { logins, type Login } from "../api/audit-api"
-import { UserFilterSelect } from "./log-filters"
+import { UserFilterSelect } from "@/features/users/components/user-filter-select"
 import { LogList } from "./log-list"
 
 const route = getRouteApi("/_authenticated/audit/logins")

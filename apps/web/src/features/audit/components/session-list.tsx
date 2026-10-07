@@ -5,7 +5,7 @@ import { Badge } from "@workspace/ui/components/badge"
 import { formatServerDateTime, formatUnixTime } from "@/shared/format"
 import { useUserNames } from "@/features/users/api/users-api"
 import { sessions, type Session } from "../api/audit-api"
-import { UserFilterSelect } from "./log-filters"
+import { UserFilterSelect } from "@/features/users/components/user-filter-select"
 import { LogList } from "./log-list"
 
 const route = getRouteApi("/_authenticated/audit/sessions")

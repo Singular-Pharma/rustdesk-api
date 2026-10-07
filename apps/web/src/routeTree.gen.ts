@@ -12,8 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated.index'
+import { Route as AuthenticatedAddressBookEntriesRouteImport } from './routes/_authenticated.address-book-entries'
 import { Route as AuthenticatedDeviceGroupsRouteImport } from './routes/_authenticated.device-groups'
+import { Route as AuthenticatedTagsRouteImport } from './routes/_authenticated.tags'
 import { Route as AuthenticatedUserGroupsRouteImport } from './routes/_authenticated.user-groups'
+import { Route as AuthenticatedAddressBooksIndexRouteImport } from './routes/_authenticated.address-books.index'
+import { Route as AuthenticatedAddressBooksCollectionIdRouteImport } from './routes/_authenticated.address-books.$collectionId'
 import { Route as AuthenticatedAuditConnectionsRouteImport } from './routes/_authenticated.audit.connections'
 import { Route as AuthenticatedAuditFilesRouteImport } from './routes/_authenticated.audit.files'
 import { Route as AuthenticatedAuditLoginsRouteImport } from './routes/_authenticated.audit.logins'
@@ -42,17 +46,40 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedAddressBookEntriesRoute =
+  AuthenticatedAddressBookEntriesRouteImport.update({
+    id: '/address-book-entries',
+    path: '/address-book-entries',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedDeviceGroupsRoute =
   AuthenticatedDeviceGroupsRouteImport.update({
     id: '/device-groups',
     path: '/device-groups',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedTagsRoute = AuthenticatedTagsRouteImport.update({
+  id: '/tags',
+  path: '/tags',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedUserGroupsRoute = AuthenticatedUserGroupsRouteImport.update({
   id: '/user-groups',
   path: '/user-groups',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedAddressBooksIndexRoute =
+  AuthenticatedAddressBooksIndexRouteImport.update({
+    id: '/address-books/',
+    path: '/address-books/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedAddressBooksCollectionIdRoute =
+  AuthenticatedAddressBooksCollectionIdRouteImport.update({
+    id: '/address-books/$collectionId',
+    path: '/address-books/$collectionId',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedAuditConnectionsRoute =
   AuthenticatedAuditConnectionsRouteImport.update({
     id: '/audit/connections',
@@ -131,8 +158,11 @@ const AuthenticatedUsersUserIdEditRoute =
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/login': typeof LoginRoute
+  '/address-book-entries': typeof AuthenticatedAddressBookEntriesRoute
   '/device-groups': typeof AuthenticatedDeviceGroupsRoute
+  '/tags': typeof AuthenticatedTagsRoute
   '/user-groups': typeof AuthenticatedUserGroupsRoute
+  '/address-books/$collectionId': typeof AuthenticatedAddressBooksCollectionIdRoute
   '/audit/connections': typeof AuthenticatedAuditConnectionsRoute
   '/audit/files': typeof AuthenticatedAuditFilesRoute
   '/audit/logins': typeof AuthenticatedAuditLoginsRoute
@@ -140,6 +170,7 @@ export interface FileRoutesByFullPath {
   '/audit/shares': typeof AuthenticatedAuditSharesRoute
   '/devices/new': typeof AuthenticatedDevicesNewRoute
   '/users/new': typeof AuthenticatedUsersNewRoute
+  '/address-books/': typeof AuthenticatedAddressBooksIndexRoute
   '/devices/': typeof AuthenticatedDevicesIndexRoute
   '/users/': typeof AuthenticatedUsersIndexRoute
   '/devices/$deviceId/edit': typeof AuthenticatedDevicesDeviceIdEditRoute
@@ -149,9 +180,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/address-book-entries': typeof AuthenticatedAddressBookEntriesRoute
   '/device-groups': typeof AuthenticatedDeviceGroupsRoute
+  '/tags': typeof AuthenticatedTagsRoute
   '/user-groups': typeof AuthenticatedUserGroupsRoute
   '/': typeof AuthenticatedIndexRoute
+  '/address-books/$collectionId': typeof AuthenticatedAddressBooksCollectionIdRoute
   '/audit/connections': typeof AuthenticatedAuditConnectionsRoute
   '/audit/files': typeof AuthenticatedAuditFilesRoute
   '/audit/logins': typeof AuthenticatedAuditLoginsRoute
@@ -159,6 +193,7 @@ export interface FileRoutesByTo {
   '/audit/shares': typeof AuthenticatedAuditSharesRoute
   '/devices/new': typeof AuthenticatedDevicesNewRoute
   '/users/new': typeof AuthenticatedUsersNewRoute
+  '/address-books': typeof AuthenticatedAddressBooksIndexRoute
   '/devices': typeof AuthenticatedDevicesIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/devices/$deviceId/edit': typeof AuthenticatedDevicesDeviceIdEditRoute
@@ -170,9 +205,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
+  '/_authenticated/address-book-entries': typeof AuthenticatedAddressBookEntriesRoute
   '/_authenticated/device-groups': typeof AuthenticatedDeviceGroupsRoute
+  '/_authenticated/tags': typeof AuthenticatedTagsRoute
   '/_authenticated/user-groups': typeof AuthenticatedUserGroupsRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/address-books/$collectionId': typeof AuthenticatedAddressBooksCollectionIdRoute
   '/_authenticated/audit/connections': typeof AuthenticatedAuditConnectionsRoute
   '/_authenticated/audit/files': typeof AuthenticatedAuditFilesRoute
   '/_authenticated/audit/logins': typeof AuthenticatedAuditLoginsRoute
@@ -180,6 +218,7 @@ export interface FileRoutesById {
   '/_authenticated/audit/shares': typeof AuthenticatedAuditSharesRoute
   '/_authenticated/devices/new': typeof AuthenticatedDevicesNewRoute
   '/_authenticated/users/new': typeof AuthenticatedUsersNewRoute
+  '/_authenticated/address-books/': typeof AuthenticatedAddressBooksIndexRoute
   '/_authenticated/devices/': typeof AuthenticatedDevicesIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
   '/_authenticated/devices/$deviceId/edit': typeof AuthenticatedDevicesDeviceIdEditRoute
@@ -192,8 +231,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
+    | '/address-book-entries'
     | '/device-groups'
+    | '/tags'
     | '/user-groups'
+    | '/address-books/$collectionId'
     | '/audit/connections'
     | '/audit/files'
     | '/audit/logins'
@@ -201,6 +243,7 @@ export interface FileRouteTypes {
     | '/audit/shares'
     | '/devices/new'
     | '/users/new'
+    | '/address-books/'
     | '/devices/'
     | '/users/'
     | '/devices/$deviceId/edit'
@@ -210,9 +253,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
+    | '/address-book-entries'
     | '/device-groups'
+    | '/tags'
     | '/user-groups'
     | '/'
+    | '/address-books/$collectionId'
     | '/audit/connections'
     | '/audit/files'
     | '/audit/logins'
@@ -220,6 +266,7 @@ export interface FileRouteTypes {
     | '/audit/shares'
     | '/devices/new'
     | '/users/new'
+    | '/address-books'
     | '/devices'
     | '/users'
     | '/devices/$deviceId/edit'
@@ -230,9 +277,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/login'
+    | '/_authenticated/address-book-entries'
     | '/_authenticated/device-groups'
+    | '/_authenticated/tags'
     | '/_authenticated/user-groups'
     | '/_authenticated/'
+    | '/_authenticated/address-books/$collectionId'
     | '/_authenticated/audit/connections'
     | '/_authenticated/audit/files'
     | '/_authenticated/audit/logins'
@@ -240,6 +290,7 @@ export interface FileRouteTypes {
     | '/_authenticated/audit/shares'
     | '/_authenticated/devices/new'
     | '/_authenticated/users/new'
+    | '/_authenticated/address-books/'
     | '/_authenticated/devices/'
     | '/_authenticated/users/'
     | '/_authenticated/devices/$deviceId/edit'
@@ -276,6 +327,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/address-book-entries': {
+      id: '/_authenticated/address-book-entries'
+      path: '/address-book-entries'
+      fullPath: '/address-book-entries'
+      preLoaderRoute: typeof AuthenticatedAddressBookEntriesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/device-groups': {
       id: '/_authenticated/device-groups'
       path: '/device-groups'
@@ -283,11 +341,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDeviceGroupsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/tags': {
+      id: '/_authenticated/tags'
+      path: '/tags'
+      fullPath: '/tags'
+      preLoaderRoute: typeof AuthenticatedTagsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/user-groups': {
       id: '/_authenticated/user-groups'
       path: '/user-groups'
       fullPath: '/user-groups'
       preLoaderRoute: typeof AuthenticatedUserGroupsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/address-books/': {
+      id: '/_authenticated/address-books/'
+      path: '/address-books'
+      fullPath: '/address-books/'
+      preLoaderRoute: typeof AuthenticatedAddressBooksIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/address-books/$collectionId': {
+      id: '/_authenticated/address-books/$collectionId'
+      path: '/address-books/$collectionId'
+      fullPath: '/address-books/$collectionId'
+      preLoaderRoute: typeof AuthenticatedAddressBooksCollectionIdRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/audit/connections': {
@@ -385,9 +464,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedAddressBookEntriesRoute: typeof AuthenticatedAddressBookEntriesRoute
   AuthenticatedDeviceGroupsRoute: typeof AuthenticatedDeviceGroupsRoute
+  AuthenticatedTagsRoute: typeof AuthenticatedTagsRoute
   AuthenticatedUserGroupsRoute: typeof AuthenticatedUserGroupsRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedAddressBooksCollectionIdRoute: typeof AuthenticatedAddressBooksCollectionIdRoute
   AuthenticatedAuditConnectionsRoute: typeof AuthenticatedAuditConnectionsRoute
   AuthenticatedAuditFilesRoute: typeof AuthenticatedAuditFilesRoute
   AuthenticatedAuditLoginsRoute: typeof AuthenticatedAuditLoginsRoute
@@ -395,6 +477,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedAuditSharesRoute: typeof AuthenticatedAuditSharesRoute
   AuthenticatedDevicesNewRoute: typeof AuthenticatedDevicesNewRoute
   AuthenticatedUsersNewRoute: typeof AuthenticatedUsersNewRoute
+  AuthenticatedAddressBooksIndexRoute: typeof AuthenticatedAddressBooksIndexRoute
   AuthenticatedDevicesIndexRoute: typeof AuthenticatedDevicesIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
   AuthenticatedDevicesDeviceIdEditRoute: typeof AuthenticatedDevicesDeviceIdEditRoute
@@ -404,9 +487,13 @@ interface AuthenticatedRouteChildren {
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAddressBookEntriesRoute: AuthenticatedAddressBookEntriesRoute,
   AuthenticatedDeviceGroupsRoute: AuthenticatedDeviceGroupsRoute,
+  AuthenticatedTagsRoute: AuthenticatedTagsRoute,
   AuthenticatedUserGroupsRoute: AuthenticatedUserGroupsRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedAddressBooksCollectionIdRoute:
+    AuthenticatedAddressBooksCollectionIdRoute,
   AuthenticatedAuditConnectionsRoute: AuthenticatedAuditConnectionsRoute,
   AuthenticatedAuditFilesRoute: AuthenticatedAuditFilesRoute,
   AuthenticatedAuditLoginsRoute: AuthenticatedAuditLoginsRoute,
@@ -414,6 +501,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAuditSharesRoute: AuthenticatedAuditSharesRoute,
   AuthenticatedDevicesNewRoute: AuthenticatedDevicesNewRoute,
   AuthenticatedUsersNewRoute: AuthenticatedUsersNewRoute,
+  AuthenticatedAddressBooksIndexRoute: AuthenticatedAddressBooksIndexRoute,
   AuthenticatedDevicesIndexRoute: AuthenticatedDevicesIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
   AuthenticatedDevicesDeviceIdEditRoute: AuthenticatedDevicesDeviceIdEditRoute,
