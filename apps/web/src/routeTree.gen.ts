@@ -25,6 +25,8 @@ import { Route as AuthenticatedAuditSessionsRouteImport } from './routes/_authen
 import { Route as AuthenticatedAuditSharesRouteImport } from './routes/_authenticated.audit.shares'
 import { Route as AuthenticatedDevicesIndexRouteImport } from './routes/_authenticated.devices.index'
 import { Route as AuthenticatedDevicesNewRouteImport } from './routes/_authenticated.devices.new'
+import { Route as AuthenticatedServerCommandsRouteImport } from './routes/_authenticated.server.commands'
+import { Route as AuthenticatedServerSettingsRouteImport } from './routes/_authenticated.server.settings'
 import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated.users.index'
 import { Route as AuthenticatedUsersNewRouteImport } from './routes/_authenticated.users.new'
 import { Route as AuthenticatedDevicesDeviceIdIndexRouteImport } from './routes/_authenticated.devices.$deviceId.index'
@@ -120,6 +122,18 @@ const AuthenticatedDevicesNewRoute = AuthenticatedDevicesNewRouteImport.update({
   path: '/devices/new',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedServerCommandsRoute =
+  AuthenticatedServerCommandsRouteImport.update({
+    id: '/server/commands',
+    path: '/server/commands',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedServerSettingsRoute =
+  AuthenticatedServerSettingsRouteImport.update({
+    id: '/server/settings',
+    path: '/server/settings',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
   id: '/users/',
   path: '/users/',
@@ -169,6 +183,8 @@ export interface FileRoutesByFullPath {
   '/audit/sessions': typeof AuthenticatedAuditSessionsRoute
   '/audit/shares': typeof AuthenticatedAuditSharesRoute
   '/devices/new': typeof AuthenticatedDevicesNewRoute
+  '/server/commands': typeof AuthenticatedServerCommandsRoute
+  '/server/settings': typeof AuthenticatedServerSettingsRoute
   '/users/new': typeof AuthenticatedUsersNewRoute
   '/address-books/': typeof AuthenticatedAddressBooksIndexRoute
   '/devices/': typeof AuthenticatedDevicesIndexRoute
@@ -192,6 +208,8 @@ export interface FileRoutesByTo {
   '/audit/sessions': typeof AuthenticatedAuditSessionsRoute
   '/audit/shares': typeof AuthenticatedAuditSharesRoute
   '/devices/new': typeof AuthenticatedDevicesNewRoute
+  '/server/commands': typeof AuthenticatedServerCommandsRoute
+  '/server/settings': typeof AuthenticatedServerSettingsRoute
   '/users/new': typeof AuthenticatedUsersNewRoute
   '/address-books': typeof AuthenticatedAddressBooksIndexRoute
   '/devices': typeof AuthenticatedDevicesIndexRoute
@@ -217,6 +235,8 @@ export interface FileRoutesById {
   '/_authenticated/audit/sessions': typeof AuthenticatedAuditSessionsRoute
   '/_authenticated/audit/shares': typeof AuthenticatedAuditSharesRoute
   '/_authenticated/devices/new': typeof AuthenticatedDevicesNewRoute
+  '/_authenticated/server/commands': typeof AuthenticatedServerCommandsRoute
+  '/_authenticated/server/settings': typeof AuthenticatedServerSettingsRoute
   '/_authenticated/users/new': typeof AuthenticatedUsersNewRoute
   '/_authenticated/address-books/': typeof AuthenticatedAddressBooksIndexRoute
   '/_authenticated/devices/': typeof AuthenticatedDevicesIndexRoute
@@ -242,6 +262,8 @@ export interface FileRouteTypes {
     | '/audit/sessions'
     | '/audit/shares'
     | '/devices/new'
+    | '/server/commands'
+    | '/server/settings'
     | '/users/new'
     | '/address-books/'
     | '/devices/'
@@ -265,6 +287,8 @@ export interface FileRouteTypes {
     | '/audit/sessions'
     | '/audit/shares'
     | '/devices/new'
+    | '/server/commands'
+    | '/server/settings'
     | '/users/new'
     | '/address-books'
     | '/devices'
@@ -289,6 +313,8 @@ export interface FileRouteTypes {
     | '/_authenticated/audit/sessions'
     | '/_authenticated/audit/shares'
     | '/_authenticated/devices/new'
+    | '/_authenticated/server/commands'
+    | '/_authenticated/server/settings'
     | '/_authenticated/users/new'
     | '/_authenticated/address-books/'
     | '/_authenticated/devices/'
@@ -418,6 +444,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDevicesNewRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/server/commands': {
+      id: '/_authenticated/server/commands'
+      path: '/server/commands'
+      fullPath: '/server/commands'
+      preLoaderRoute: typeof AuthenticatedServerCommandsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/server/settings': {
+      id: '/_authenticated/server/settings'
+      path: '/server/settings'
+      fullPath: '/server/settings'
+      preLoaderRoute: typeof AuthenticatedServerSettingsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
@@ -476,6 +516,8 @@ interface AuthenticatedRouteChildren {
   AuthenticatedAuditSessionsRoute: typeof AuthenticatedAuditSessionsRoute
   AuthenticatedAuditSharesRoute: typeof AuthenticatedAuditSharesRoute
   AuthenticatedDevicesNewRoute: typeof AuthenticatedDevicesNewRoute
+  AuthenticatedServerCommandsRoute: typeof AuthenticatedServerCommandsRoute
+  AuthenticatedServerSettingsRoute: typeof AuthenticatedServerSettingsRoute
   AuthenticatedUsersNewRoute: typeof AuthenticatedUsersNewRoute
   AuthenticatedAddressBooksIndexRoute: typeof AuthenticatedAddressBooksIndexRoute
   AuthenticatedDevicesIndexRoute: typeof AuthenticatedDevicesIndexRoute
@@ -500,6 +542,8 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAuditSessionsRoute: AuthenticatedAuditSessionsRoute,
   AuthenticatedAuditSharesRoute: AuthenticatedAuditSharesRoute,
   AuthenticatedDevicesNewRoute: AuthenticatedDevicesNewRoute,
+  AuthenticatedServerCommandsRoute: AuthenticatedServerCommandsRoute,
+  AuthenticatedServerSettingsRoute: AuthenticatedServerSettingsRoute,
   AuthenticatedUsersNewRoute: AuthenticatedUsersNewRoute,
   AuthenticatedAddressBooksIndexRoute: AuthenticatedAddressBooksIndexRoute,
   AuthenticatedDevicesIndexRoute: AuthenticatedDevicesIndexRoute,
