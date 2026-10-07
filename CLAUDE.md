@@ -4,7 +4,7 @@ Fork Singular do [lejianwen/rustdesk-api](https://github.com/lejianwen/rustdesk-
 
 - `apps/api`: API Go original (Gin + Gorm). Serve o cliente RustDesk e o contrato `/api/admin` usado pelo painel. Deploy pelo Dokploy na sp1 com `apps/api/dokploy/docker-compose.yml`.
 - `apps/web`: painel administrativo novo em React (Vercel). Substitui o painel Vue do `rustdesk-api-web`, que continua embutido na imagem da API até o painel novo ser adotado.
-- `packages/ui`: componentes shadcn e tema, copiados do plexus-backoffice (preset `b1aIcEcnS`, Base UI, Outfit, Lucide).
+- `packages/ui`: componentes shadcn sobre Base UI, com o tema da Singular Pharma (Raleway, Lucide).
 
 UI em pt-BR, identificadores em inglês. Base dos PRs: `singular`. Merge commit, nunca squash.
 
@@ -43,8 +43,6 @@ A API Go não tem toolchain na máquina de desenvolvimento atual. Mudança em `a
 
 ## Arquitetura do painel
 
-Mesma organização do plexus-backoffice, sem copiar as regras de negócio dele:
-
 - React 19, Vite, TypeScript, Tailwind CSS 4, TanStack Router (rotas em `apps/web/src/routes/`, `routeTree.gen.ts` gerado), TanStack Query, TanStack Table, React Hook Form + Zod, Zustand para sessão e tema, Axios.
 - `features/<feature>/api`, `components`, `schemas.ts`. `shared/api` concentra cliente HTTP, envelope e tradução de erros. `shared/components/list-screen.tsx` monta listas (busca, filtros, estados, tabela no desktop, lista no celular, rolagem infinita).
 - Busca, filtros e ordenação vivem na URL com schema Zod na rota.
@@ -52,7 +50,15 @@ Mesma organização do plexus-backoffice, sem copiar as regras de negócio dele:
 
 ## UI e copy
 
-Seguir as regras do plexus-backoffice (`DESIGN.md`, `docs/ui-copy.md`, `docs/list-screen.md` daquele repo):
+Visual da marca Singular Pharma, tirado do site institucional. Tokens em `packages/ui/src/styles/globals.css`:
+
+- Azul da marca `#0081bb` (`brand`) só em superfícies sem texto pequeno: painel do login, favicon, foco. Botão, link e item ativo usam `primary` `#0076ab`, a variação que passa AA com texto branco; a faixa do logo na barra lateral usa `brand-strong`, que tem o mesmo valor. No escuro, `primary` é `#3fb0e3` com texto `slate-950`.
+- Neutros na escala slate do Tailwind; fundo escuro em `slate-950`, superfícies em `slate-900`.
+- Raleway variável. Os algarismos dela são de estilo antigo por padrão, por isso o `body` liga `lnum`; número que se compara (tabela, indicador, data, código) leva `tabular-nums`.
+- Raio de 6px nos controles e 8px nas superfícies. Menu e diálogo sólidos, com borda e sombra curta; sem desfoque nem transparência.
+- Logos em `apps/web/public/brand/`: `singular-pharma-blue.svg` no fundo claro, `singular-pharma-white.svg` no escuro ou sobre o azul, `singular-mark-white.svg` (só a folha) na barra recolhida. Componentes em `shared/components/brand.tsx`.
+
+Regras de tela e texto:
 
 1. O dado fala primeiro. Sem slogans, subtítulos óbvios ou KPIs inventados.
 2. Breadcrumb é o título da seção; detalhe pode ter o nome da entidade em h1.

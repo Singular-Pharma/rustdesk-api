@@ -1,23 +1,52 @@
-import { MonitorSmartphone } from "lucide-react"
 import { cn } from "@workspace/ui/lib/utils"
 
-export function BrandMark({ className }: { className?: string }) {
+const logoAlt = "Singular Pharma"
+
+export function BrandLogo({
+  onBrand = false,
+  className,
+}: {
+  onBrand?: boolean
+  className?: string
+}) {
+  if (onBrand)
+    return (
+      <img
+        src="/brand/singular-pharma-white.svg"
+        alt={logoAlt}
+        className={cn("h-8 w-auto", className)}
+      />
+    )
   return (
-    <span
-      aria-hidden
-      className={cn(
-        "flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground",
-        className
-      )}
-    >
-      <MonitorSmartphone className="size-4.5" />
-    </span>
+    <>
+      <img
+        src="/brand/singular-pharma-blue.svg"
+        alt={logoAlt}
+        className={cn("h-8 w-auto dark:hidden", className)}
+      />
+      <img
+        src="/brand/singular-pharma-white.svg"
+        alt={logoAlt}
+        className={cn("hidden h-8 w-auto dark:block", className)}
+      />
+    </>
   )
 }
 
-export function BrandName({ className }: { className?: string }) {
+export function BrandLeaf({ className }: { className?: string }) {
   return (
-    <span className={cn("text-base font-semibold tracking-tight", className)}>
+    <img
+      src="/brand/singular-mark-white.svg"
+      alt=""
+      aria-hidden
+      className={cn("h-8 w-auto", className)}
+    />
+  )
+}
+
+export function ProductName({ className }: { className?: string }) {
+  return (
+    <span className={cn("text-sm font-semibold tracking-tight", className)}>
       Acesso remoto
     </span>
   )

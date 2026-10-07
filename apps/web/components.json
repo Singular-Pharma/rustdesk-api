@@ -1,12 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "base-luma",
+  "style": "base-nova",
   "rsc": false,
   "tsx": true,
   "tailwind": {
     "config": "",
     "css": "../../packages/ui/src/styles/globals.css",
-    "baseColor": "neutral",
+    "baseColor": "slate",
     "cssVariables": true
   },
   "iconLibrary": "lucide",
@@ -18,6 +18,6 @@
     "ui": "@workspace/ui/components"
   },
   "rtl": false,
-  "menuColor": "default-translucent",
+  "menuColor": "default",
   "menuAccent": "subtle"
 }

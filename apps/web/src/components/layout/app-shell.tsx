@@ -5,7 +5,7 @@ import {
   Boxes,
   Cable,
   ChevronRight,
-  ChevronsUpDown,
+  ChevronDown,
   Contact,
   FileStack,
   House,
@@ -26,7 +26,6 @@ import {
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -69,7 +68,7 @@ import { useSidebarGroupsStore } from "@/stores/sidebar-groups-store"
 import { logout } from "@/features/auth/api/auth-api"
 import { displayName, isAdmin } from "@/features/auth/types"
 import { UserAvatar } from "@/shared/components/user-avatar"
-import { BrandMark, BrandName } from "@/shared/components/brand"
+import { BrandLeaf, BrandLogo, ProductName } from "@/shared/components/brand"
 
 const navigation = [
   {
@@ -163,26 +162,25 @@ function locate(path: string) {
 
 function AccountMenu() {
   const principal = useAuthStore((state) => state.principal)
-  const { isMobile } = useSidebar()
   const name = displayName(principal)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={<SidebarMenuButton size="lg" />}
+        render={<Button variant="ghost" className="h-10 gap-2 px-1.5" />}
         aria-label="Opções da conta"
       >
         <UserAvatar name={name} />
-        <span className="flex min-w-0 flex-1 flex-col gap-0.5 text-left group-data-[collapsible=icon]:hidden">
-          <span className="truncate font-medium">{name}</span>
-          <span className="text-xs text-muted-foreground">Administrador</span>
+        <span className="hidden max-w-40 flex-col items-start leading-tight md:flex">
+          <span className="w-full truncate text-left text-sm font-semibold">
+            {name}
+          </span>
+          <span className="text-xs font-normal text-muted-foreground">
+            Administrador
+          </span>
         </span>
-        <ChevronsUpDown className="group-data-[collapsible=icon]:hidden" />
+        <ChevronDown className="hidden text-muted-foreground md:block" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align="end"
-        side={isMobile ? "top" : "right"}
-        className="w-64"
-      >
+      <DropdownMenuContent align="end" side="bottom" className="w-64">
         <DropdownMenuGroup>
           <DropdownMenuLabel className="break-all whitespace-normal">
             {principal?.email || principal?.username}
@@ -238,20 +236,32 @@ function Workspace() {
         Ir para o conteúdo
       </a>
       <Sidebar collapsible="icon">
-        <SidebarHeader className="p-3">
-          <div className="flex h-10 items-center justify-between px-2 group-data-[collapsible=icon]:px-0">
+        <SidebarHeader className="p-0">
+          <div className="flex h-16 items-center justify-between gap-2 bg-brand-strong px-4 text-brand-foreground group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
             <Link
               to="/"
-              className="flex items-center gap-2 rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              aria-label="Acesso remoto, início"
+              className="flex min-w-0 items-center gap-3 rounded-sm focus-visible:ring-2 focus-visible:ring-brand-foreground focus-visible:outline-none"
             >
-              <BrandMark />
-              <BrandName className="group-data-[collapsible=icon]:hidden" />
+              {iconOnly ? (
+                <BrandLeaf className="h-9" />
+              ) : (
+                <>
+                  <BrandLogo onBrand className="h-9" />
+                  <span
+                    aria-hidden
+                    className="h-6 w-px bg-brand-foreground/40"
+                  />
+                  <ProductName className="truncate" />
+                </>
+              )}
             </Link>
             {isMobile && (
               <Button
                 variant="ghost"
                 size="icon"
                 aria-label="Fechar navegação"
+                className="text-brand-foreground hover:bg-brand-foreground/15 hover:text-brand-foreground"
                 onClick={() => setOpenMobile(false)}
               >
                 <X />
@@ -310,14 +320,11 @@ function Workspace() {
             )
           })}
         </SidebarContent>
-        <SidebarFooter className="p-3">
-          <AccountMenu />
-        </SidebarFooter>
       </Sidebar>
       <SidebarInset className="min-w-0">
         <header
           role="banner"
-          className="flex min-h-16 items-center gap-3 border-b px-4 md:px-8"
+          className="sticky top-0 z-10 flex min-h-16 items-center gap-3 border-b bg-background px-4 md:px-8"
         >
           <SidebarTrigger
             aria-label={
@@ -365,7 +372,10 @@ function Workspace() {
               </BreadcrumbList>
             </Breadcrumb>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            <AccountMenu />
+          </div>
         </header>
         <div
           id="main-content"
@@ -384,10 +394,7 @@ function AdminOnly() {
   return (
     <main className="flex min-h-svh flex-col bg-background px-6 py-8 sm:px-12">
       <div className="flex items-center justify-between gap-4">
-        <span className="flex items-center gap-2">
-          <BrandMark />
-          <BrandName />
-        </span>
+        <BrandLogo />
         <ThemeToggle />
       </div>
       <section
