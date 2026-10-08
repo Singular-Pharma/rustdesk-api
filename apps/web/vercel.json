@@ -4,6 +4,13 @@
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/download",
+      "destination": "https://public-storage.singularpharma.com.br/acesso-remoto/AcessoRemoto-Setup.exe",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/admin/:path*",
