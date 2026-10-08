@@ -95,6 +95,7 @@ export function LogList<T extends { id: number }>({
   )
 
   const table = useReactTable({
+    autoResetPageIndex: false,
     data: rows,
     columns: [
       selectionColumn(describe),

@@ -44,6 +44,7 @@ A API Go não tem toolchain na máquina de desenvolvimento atual. Mudança em `a
 ## Arquitetura do painel
 
 - React 19, Vite, TypeScript, Tailwind CSS 4, TanStack Router (rotas em `apps/web/src/routes/`, `routeTree.gen.ts` gerado), TanStack Query, TanStack Table, React Hook Form + Zod, Zustand para sessão e tema, Axios.
+- Todo `useReactTable` leva `autoResetPageIndex: false`. As listas montam `data` e `columns` a cada render, e com o reset ligado a tabela reseta a página a cada render, o que gera um loop de renderização que trava a página quando um diálogo abre.
 - `features/<feature>/api`, `components`, `schemas.ts`. `shared/api` concentra cliente HTTP, envelope e tradução de erros. `shared/components/list-screen.tsx` monta listas (busca, filtros, estados, tabela no desktop, lista no celular, rolagem infinita).
 - Busca, filtros e ordenação vivem na URL com schema Zod na rota.
 - Mutations invalidam as queries relacionadas. Troca ou fim de sessão limpa o cache.

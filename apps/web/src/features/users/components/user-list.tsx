@@ -161,6 +161,7 @@ export function UserList() {
     },
   ]
   const table = useReactTable({
+    autoResetPageIndex: false,
     data: rows,
     columns,
     getRowId: (user) => String(user.id),

@@ -143,6 +143,7 @@ export function CollectionList() {
     },
   ]
   const table = useReactTable({
+    autoResetPageIndex: false,
     data: rows,
     columns,
     getRowId: (collection) => String(collection.id),

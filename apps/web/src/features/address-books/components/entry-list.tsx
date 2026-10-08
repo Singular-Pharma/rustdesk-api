@@ -193,6 +193,7 @@ export function EntryList() {
     },
   ]
   const table = useReactTable({
+    autoResetPageIndex: false,
     data: rows,
     columns,
     rowCount: total,
